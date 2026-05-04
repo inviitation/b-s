@@ -3,14 +3,12 @@ const main = document.getElementById("main");
 const music = document.getElementById("music");
 const btn = document.getElementById("musicBtn");
 
-/* يبدأ من Intro */
 window.onload = () => {
   intro.style.display = "flex";
   main.style.display = "none";
   document.body.classList.add("no-scroll");
 };
 
-/* دخول */
 intro.onclick = () => {
   intro.style.display = "none";
   main.style.display = "block";
@@ -29,83 +27,57 @@ intro.onclick = () => {
   });
 };
 
-/* Fade In */
-function fadeInMusic() {
+function fadeInMusic(){
   music.volume = 0;
   music.play().catch(()=>{});
-
-  let v = 0;
-  const fade = setInterval(() => {
-    if (v < 1) {
-      v += 0.05;
-      music.volume = v;
-    } else {
-      clearInterval(fade);
-    }
-  }, 100);
+  let v=0;
+  let i=setInterval(()=>{
+    if(v<1){v+=0.05;music.volume=v;}
+    else clearInterval(i);
+  },100);
 }
 
-/* Fade Out */
-function fadeOutMusic() {
-  let v = music.volume;
-
-  const fade = setInterval(() => {
-    if (v > 0) {
-      v -= 0.05;
-      music.volume = v;
-    } else {
-      music.pause();
-      clearInterval(fade);
-    }
-  }, 100);
+function fadeOutMusic(){
+  let v=music.volume;
+  let i=setInterval(()=>{
+    if(v>0){v-=0.05;music.volume=v;}
+    else{music.pause();clearInterval(i);}
+  },100);
 }
 
-/* زرار الصوت */
-btn.onclick = () => {
-  if (music.paused) {
-    fadeInMusic();
-    btn.innerHTML = "🔊";
-  } else {
-    fadeOutMusic();
-    btn.innerHTML = "🔇";
-  }
+btn.onclick=()=>{
+  if(music.paused){fadeInMusic();btn.innerHTML="🔊";}
+  else{fadeOutMusic();btn.innerHTML="🔇";}
 };
 
-/* countdown */
-const target = new Date("May 15, 2026 19:30").getTime();
+const t=new Date("May 15, 2026 19:30").getTime();
 
-setInterval(() => {
-  const now = new Date().getTime();
-  const diff = target - now;
+setInterval(()=>{
+  let d=t-Date.now();
+  upd("days",d/864e5);
+  upd("hours",d/36e5%24);
+  upd("minutes",d/6e4%60);
+  upd("seconds",d/1e3%60);
+},1000);
 
-  update("days", Math.floor(diff / (1000 * 60 * 60 * 24)));
-  update("hours", Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
-  update("minutes", Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)));
-  update("seconds", Math.floor((diff % (1000 * 60)) / 1000));
-}, 1000);
-
-function update(id, value) {
-  const el = document.getElementById(id);
-
-  if (el.textContent != value) {
-    el.classList.add("animate");
-
-    setTimeout(() => {
-      el.textContent = value;
-      el.classList.remove("animate");
-    }, 120);
+function upd(id,v){
+  let e=document.getElementById(id);
+  v=Math.floor(v);
+  if(e.textContent!=v){
+    e.classList.add("animate");
+    setTimeout(()=>{
+      e.textContent=v;
+      e.classList.remove("animate");
+    },120);
   }
 }
 
-/* hearts */
-document.addEventListener("click", (e) => {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = "❤️";
-  heart.style.left = e.clientX + "px";
-  heart.style.top = e.clientY + "px";
-
-  document.body.appendChild(heart);
-
-  setTimeout(() => heart.remove(), 1000);
+document.addEventListener("click",(e)=>{
+  let h=document.createElement("div");
+  h.className="heart";
+  h.innerHTML="❤️";
+  h.style.left=e.clientX+"px";
+  h.style.top=e.clientY+"px";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),1000);
 });
