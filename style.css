@@ -1,0 +1,159 @@
+body {
+  margin: 0;
+  font-family: 'Cormorant Garamond', serif;
+  background: url('bg.jpg') center/cover no-repeat fixed;
+  overflow-x: hidden;
+}
+
+/* منع السكرول */
+body.no-scroll {
+  overflow: hidden;
+}
+
+/* Intro */
+.intro {
+  height: 100vh;
+  background: radial-gradient(circle, #111, #000);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* Main */
+.main {
+  background: rgba(10,10,10,0.55);
+  backdrop-filter: blur(6px);
+  padding: 40px 20px;
+  max-width: 500px;
+  margin: auto;
+}
+
+/* Text */
+h1 {
+  font-family: 'Playfair Display', serif;
+  color: #f5f5f5;
+  text-align: center;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: 1s;
+}
+
+h1.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+h2, p {
+  color: #e0e0e0;
+  text-align: center;
+}
+
+span {
+  color: #d4af37;
+}
+
+/* Sections */
+.section {
+  margin-bottom: 60px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.8s;
+}
+
+.section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Countdown */
+.countdown {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.countdown div {
+  flex: 1;
+  background: rgba(255,255,255,0.08);
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.countdown span {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  color: #d4af37;
+  transition: 0.2s;
+}
+
+.countdown span.animate {
+  transform: scale(1.15);
+  opacity: 0.6;
+}
+
+/* 👇 تم التعديل هنا */
+.countdown p {
+  font-size: 14px;
+  color: #e0e0e0;
+  letter-spacing: 1px;
+  margin-top: 5px;
+}
+
+/* Map Button (متوسّط) */
+.map-btn {
+  display: block;
+  margin: 20px auto;
+  padding: 6px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+
+  background: linear-gradient(135deg, #d4af37, #b8962e);
+  color: black;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  text-align: center;
+  width: fit-content;
+
+  transition: all 0.2s ease;
+}
+
+.map-btn:active {
+  transform: scale(0.92);
+}
+
+/* Music Button */
+#musicBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+/* Hearts */
+.heart {
+  position: absolute;
+  color: #ff4d6d;
+  font-size: 20px;
+  animation: float 1s ease-out forwards;
+}
+
+@keyframes float {
+  from { transform: translateY(0); opacity:1 }
+  to { transform: translateY(-80px); opacity:0 }
+}
+
+/* Responsive */
+@media (min-width:768px){
+  .main { max-width:420px; }
+}
