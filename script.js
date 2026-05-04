@@ -1,6 +1,7 @@
 const intro=document.getElementById("intro");
 const main=document.getElementById("main");
 const music=document.getElementById("music");
+const btn=document.getElementById("musicBtn");
 
 window.onload=()=>{
   intro.style.display="flex";
@@ -16,14 +17,20 @@ intro.onclick=()=>{
   music.play().catch(()=>{});
 
   requestAnimationFrame(()=>{
-    document.querySelectorAll(".section").forEach((sec,i)=>{
-      setTimeout(()=>sec.classList.add("show"),i*300);
+    document.querySelectorAll(".section").forEach((s,i)=>{
+      setTimeout(()=>s.classList.add("show"),i*300);
     });
 
     setTimeout(()=>{
       document.querySelector("h1").classList.add("show");
     },500);
   });
+};
+
+/* music toggle */
+btn.onclick=()=>{
+  if(music.paused){music.play();btn.innerHTML="🔊";}
+  else{music.pause();btn.innerHTML="🔇";}
 };
 
 /* countdown */
@@ -37,7 +44,7 @@ setInterval(()=>{
 },1000);
 
 function upd(id,v){
-  const e=document.getElementById(id);
+  let e=document.getElementById(id);
   v=Math.floor(v);
   if(e.textContent!=v){
     e.classList.add("animate");
