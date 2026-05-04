@@ -1,8 +1,15 @@
 body {
   margin: 0;
   font-family: 'Cormorant Garamond', serif;
-  background: url('bg.jpg') center/cover no-repeat fixed;
+  background: url('bg.jpg') center/cover no-repeat;
   overflow-x: hidden;
+}
+
+/* حل اهتزاز الخلفية */
+@media (min-width: 768px) {
+  body {
+    background-attachment: fixed;
+  }
 }
 
 /* منع السكرول */
@@ -25,6 +32,7 @@ body.no-scroll {
 
 /* Main */
 .main {
+  display: none;
   background: rgba(10,10,10,0.55);
   backdrop-filter: blur(6px);
   padding: 40px 20px;
@@ -96,43 +104,36 @@ span {
   opacity: 0.6;
 }
 
-/* 👇 تم التعديل هنا */
 .countdown p {
   font-size: 14px;
   color: #e0e0e0;
-  letter-spacing: 1px;
   margin-top: 5px;
 }
 
-/* Map Button (متوسّط) */
+/* Map Button */
 .map-btn {
   display: block;
   margin: 20px auto;
   padding: 6px 12px;
   border-radius: 8px;
   text-decoration: none;
-
   background: linear-gradient(135deg, #d4af37, #b8962e);
   color: black;
-
   font-size: 14px;
   font-weight: 600;
-
-  text-align: center;
   width: fit-content;
-
-  transition: all 0.2s ease;
 }
 
 .map-btn:active {
   transform: scale(0.92);
 }
 
-/* Music Button */
+/* Music Button (FIXED) */
 #musicBtn {
   position: fixed;
   bottom: 20px;
   right: 20px;
+  z-index: 9999;
   background: rgba(0,0,0,0.6);
   color: white;
   border: none;
@@ -151,9 +152,4 @@ span {
 @keyframes float {
   from { transform: translateY(0); opacity:1 }
   to { transform: translateY(-80px); opacity:0 }
-}
-
-/* Responsive */
-@media (min-width:768px){
-  .main { max-width:420px; }
 }

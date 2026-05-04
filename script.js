@@ -1,13 +1,20 @@
 const intro = document.getElementById("intro");
+const main = document.getElementById("main");
 const music = document.getElementById("music");
 const musicBtn = document.getElementById("musicBtn");
 
-/* منع السكرول */
-document.body.classList.add("no-scroll");
+/* دايمًا يبدأ من Intro */
+window.onload = () => {
+  intro.style.display = "flex";
+  main.style.display = "none";
+  document.body.classList.add("no-scroll");
+};
 
-/* Enter */
+/* دخول */
 intro.addEventListener("click", () => {
   intro.style.display = "none";
+  main.style.display = "block";
+
   document.body.classList.remove("no-scroll");
 
   fadeInMusic();
@@ -21,7 +28,7 @@ intro.addEventListener("click", () => {
   });
 });
 
-/* Fade in */
+/* Music */
 function fadeInMusic() {
   music.volume = 0;
   music.play();
@@ -32,7 +39,6 @@ function fadeInMusic() {
   },100);
 }
 
-/* Fade out */
 function fadeOutMusic() {
   let v = music.volume;
   const i = setInterval(()=>{
@@ -41,7 +47,6 @@ function fadeOutMusic() {
   },100);
 }
 
-/* Toggle */
 musicBtn.addEventListener("click", () => {
   if (music.paused) {
     fadeInMusic();
@@ -91,9 +96,8 @@ document.addEventListener("click", (e) => {
   setTimeout(()=>heart.remove(),1000);
 });
 
-/* Vibration للزرار */
-const mapBtn = document.querySelector(".map-btn");
-mapBtn.addEventListener("click", ()=>{
+/* Vibration زرار */
+document.querySelector(".map-btn").addEventListener("click", ()=>{
   if(navigator.vibrate){
     navigator.vibrate([20,40,20]);
   }
